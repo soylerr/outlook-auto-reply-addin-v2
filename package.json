@@ -1,0 +1,28 @@
+{
+  "name": "outlook-auto-reply-addin",
+  "version": "1.0.0",
+  "description": "Outlook add-in for standardized automatic reply messages",
+  "main": "taskpane.html",
+  "scripts": {
+    "start": "npx http-server -p 8080 -c-1",
+    "build": "echo 'No build process needed for static files'",
+    "deploy": "gh-pages -d ."
+  },
+  "keywords": [
+    "outlook",
+    "office-addin",
+    "auto-reply",
+    "javascript"
+  ],
+  "author": "Öztüryakiler",
+  "license": "MIT",
+  "devDependencies": {
+    "gh-pages": "^6.0.0",
+    "http-server": "^14.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ridvan-soyler/outlook-auto-reply-addin-v2.git"
+  },
+  "homepage": "https://ridvan-soyler.github.io/outlook-auto-reply-addin-v2"
+}

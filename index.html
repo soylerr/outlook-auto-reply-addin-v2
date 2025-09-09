@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outlook Otomatik Yanıt Eklentisi</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .header {
+            background: #0078d4;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 300;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.2em;
+        }
+        .content {
+            padding: 40px;
+        }
+        .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #0078d4;
+        }
+        .feature-icon {
+            font-size: 2em;
+            margin-right: 20px;
+            width: 60px;
+            text-align: center;
+        }
+        .feature-content h3 {
+            margin: 0 0 10px 0;
+            color: #323130;
+        }
+        .feature-content p {
+            margin: 0;
+            color: #605e5c;
+        }
+        .download-section {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background: #f3f2f1;
+            border-radius: 8px;
+        }
+        .btn {
+            display: inline-block;
+            background: #0078d4;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            margin: 10px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #106ebe;
+        }
+        .btn-secondary {
+            background: #6c757d;
+        }
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        .installation-steps {
+            margin-top: 30px;
+        }
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        .step-number {
+            background: #0078d4;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .step-content {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏢 Outlook Otomatik Yanıt Eklentisi</h1>
+            <p>Şirket standart otomatik yanıt mesajları için gelişmiş yönetici</p>
+        </div>
+        
+        <div class="content">
+            <div class="feature">
+                <div class="feature-icon">🇹🇷</div>
+                <div class="feature-content">
+                    <h3>Çok Dilli Destek</h3>
+                    <p>Türkçe ve İngilizce standart şablonlar ile kurum içi ve dışı iletişim</p>
+                </div>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">👥</div>
+                <div class="feature-content">
+                    <h3>D365 Entegrasyonu</h3>
+                    <p>Şirket personeli listesinden yetkili kişi seçimi</p>
+                </div>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">📅</div>
+                <div class="feature-content">
+                    <h3>Akıllı Tarih Seçimi</h3>
+                    <p>Başlangıç ve bitiş tarihleri ile saat seçimi</p>
+                </div>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">🔒</div>
+                <div class="feature-content">
+                    <h3>Standart Şablonlar</h3>
+                    <p>Kullanıcı mesaj içeriğini değiştiremez, sadece gerekli bilgileri girer</p>
+                </div>
+            </div>
+            
+            <div class="download-section">
+                <h2>Eklentiyi Yükle</h2>
+                <p>Outlook eklentisini yüklemek için aşağıdaki manifest dosyasını indirin</p>
+                
+                <a href="manifest.xml" class="btn" download>
+                    📥 Manifest İndir (manifest.xml)
+                </a>
+                
+                <a href="https://github.com/ridvan-soyler/outlook-auto-reply-addin-v2" class="btn btn-secondary" target="_blank">
+                    📂 GitHub'da Görüntüle
+                </a>
+                
+                <div class="installation-steps">
+                    <h3>Kurulum Adımları:</h3>
+                    
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <strong>Manifest dosyasını indirin</strong><br>
+                            Yukarıdaki "Manifest İndir" butonuna tıklayarak manifest.xml dosyasını bilgisayarınıza kaydedin.
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <strong>Outlook'u açın</strong><br>
+                            Outlook uygulamasını (masaüstü veya web versiyonu) açın.
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <strong>Eklenti yöneticisine gidin</strong><br>
+                            Outlook'ta "Dosya" > "Eklentileri Yönet" > "Eklenti Al" seçeneğine tıklayın.
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <strong>Manifest dosyasını yükleyin</strong><br>
+                            "Dosyadan yükle" seçeneğini seçin ve indirdiğiniz manifest.xml dosyasını seçin.
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <strong>Eklentiyi kullanmaya başlayın</strong><br>
+                            Eklenti yüklendikten sonra Outlook şeridinde "Otomatik Yanıt" butonunu göreceksiniz.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
