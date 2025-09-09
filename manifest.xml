@@ -7,7 +7,7 @@
   
   <Id>12345678-1234-1234-1234-123456789012</Id>
   <Version>1.0.0.0</Version>
-  <ProviderName>Öztüryakiler</ProviderName>
+  <ProviderName>Öztiryakiler</ProviderName>
   <DefaultLocale>tr-TR</DefaultLocale>
   <DisplayName DefaultValue="Otomatik Yanıt Yöneticisi"/>
   <Description DefaultValue="Şirket standart otomatik yanıt mesajları için gelişmiş yönetici"/>
