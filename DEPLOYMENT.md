@@ -2,26 +2,24 @@
 
 ## Repository Configuration Steps
 
-Follow these steps to properly configure GitHub Pages for this Outlook add-in:
+This deployment uses the `gh-pages` package approach that matches your working configuration.
 
 ### 1. Repository Settings
-1. Go to your GitHub repository: `https://github.com/ridvan-soyler/outlook-auto-reply-addin-v2`
+1. Go to your GitHub repository: `https://github.com/ozridvan/outlook-auto-reply-addin-v2`
 2. Click on **Settings** tab
 3. Scroll down to **Pages** section in the left sidebar
 
 ### 2. Configure GitHub Pages Source
 1. In the **Pages** settings:
-   - **Source**: Select "GitHub Actions"
-   - **Branch**: This will be automatically managed by the workflow
+   - **Source**: Select "Deploy from a branch"
+   - **Branch**: Select "gh-pages" (this will be created automatically by the workflow)
+   - **Folder**: Select "/ (root)"
 
-### 3. Environment Setup (Important!)
-1. Still in **Settings**, go to **Environments** in the left sidebar
-2. Click **New environment**
-3. Name it exactly: `github-pages`
-4. Click **Configure environment**
-5. Under **Environment protection rules**:
-   - Check "Required reviewers" if you want manual approval (optional)
-   - Add any deployment branches if needed (optional)
+### 3. Setup GH_PAT Secret (Required!)
+1. Go to **Settings** > **Secrets and variables** > **Actions**
+2. Click **New repository secret**
+3. Name: `GH_PAT`
+4. Value: Your GitHub Personal Access Token with `repo` and `pages` permissions
 
 ### 4. Repository Permissions
 1. Go to **Settings** > **Actions** > **General**
@@ -34,7 +32,7 @@ Follow these steps to properly configure GitHub Pages for this Outlook add-in:
 git add .
 git commit -m "Initial Outlook add-in with GitHub Pages deployment"
 git branch -M main
-git remote add origin https://github.com/ridvan-soyler/outlook-auto-reply-addin-v2.git
+git remote add origin https://github.com/ozridvan/outlook-auto-reply-addin-v2.git
 git push -u origin main
 ```
 
@@ -42,7 +40,7 @@ git push -u origin main
 1. Go to **Actions** tab in your repository
 2. You should see the "Deploy to GitHub Pages" workflow running
 3. Once completed, your site will be available at:
-   `https://ridvan-soyler.github.io/outlook-auto-reply-addin-v2/`
+   `https://ozridvan.github.io/outlook-auto-reply-addin-v2/`
 
 ## Troubleshooting
 

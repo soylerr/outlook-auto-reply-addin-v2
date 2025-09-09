@@ -11,9 +11,9 @@
   <DefaultLocale>tr-TR</DefaultLocale>
   <DisplayName DefaultValue="Otomatik Yanıt Yöneticisi"/>
   <Description DefaultValue="Şirket standart otomatik yanıt mesajları için gelişmiş yönetici"/>
-  <IconUrl DefaultValue="https://ridvan-soyler.github.io/outlook-auto-reply-addin-v2/assets/icon-32.png"/>
-  <HighResolutionIconUrl DefaultValue="https://ridvan-soyler.github.io/outlook-auto-reply-addin-v2/assets/icon-80.png"/>
-  <SupportUrl DefaultValue="https://github.com/ridvan-soyler/outlook-auto-reply-addin-v2"/>
+  <IconUrl DefaultValue="https://ozridvan.github.io/outlook-auto-reply-addin-v2/assets/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="https://ozridvan.github.io/outlook-auto-reply-addin-v2/assets/icon-80.png"/>
+  <SupportUrl DefaultValue="https://github.com/ozridvan/outlook-auto-reply-addin-v2"/>
   
   <Hosts>
     <Host Name="Mailbox"/>
@@ -28,7 +28,7 @@
   <FormSettings>
     <Form xsi:type="ItemRead">
       <DesktopSettings>
-        <SourceLocation DefaultValue="https://ridvan-soyler.github.io/outlook-auto-reply-addin-v2/taskpane.html"/>
+        <SourceLocation DefaultValue="https://ozridvan.github.io/outlook-auto-reply-addin-v2/taskpane.html"/>
         <RequestedHeight>450</RequestedHeight>
       </DesktopSettings>
     </Form>
@@ -88,14 +88,14 @@
       
       <Resources>
         <bt:Images>
-          <bt:Image id="Icon.16x16" DefaultValue="https://ridvan-soyler.github.io/outlook-auto-reply-addin-v2/assets/icon-16.png"/>
-          <bt:Image id="Icon.32x32" DefaultValue="https://ridvan-soyler.github.io/outlook-auto-reply-addin-v2/assets/icon-32.png"/>
-          <bt:Image id="Icon.80x80" DefaultValue="https://ridvan-soyler.github.io/outlook-auto-reply-addin-v2/assets/icon-80.png"/>
+          <bt:Image id="Icon.16x16" DefaultValue="https://ozridvan.github.io/outlook-auto-reply-addin-v2/assets/icon-16.png"/>
+          <bt:Image id="Icon.32x32" DefaultValue="https://ozridvan.github.io/outlook-auto-reply-addin-v2/assets/icon-32.png"/>
+          <bt:Image id="Icon.80x80" DefaultValue="https://ozridvan.github.io/outlook-auto-reply-addin-v2/assets/icon-80.png"/>
         </bt:Images>
         <bt:Urls>
-          <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://github.com/ridvan-soyler/outlook-auto-reply-addin-v2"/>
-          <bt:Url id="Commands.Url" DefaultValue="https://ridvan-soyler.github.io/outlook-auto-reply-addin-v2/commands.html"/>
-          <bt:Url id="Taskpane.Url" DefaultValue="https://ridvan-soyler.github.io/outlook-auto-reply-addin-v2/taskpane.html"/>
+          <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://github.com/ozridvan/outlook-auto-reply-addin-v2"/>
+          <bt:Url id="Commands.Url" DefaultValue="https://ozridvan.github.io/outlook-auto-reply-addin-v2/commands.html"/>
+          <bt:Url id="Taskpane.Url" DefaultValue="https://ozridvan.github.io/outlook-auto-reply-addin-v2/taskpane.html"/>
         </bt:Urls>
         <bt:ShortStrings>
           <bt:String id="GetStarted.Title" DefaultValue="Otomatik Yanıt Yöneticisi"/>

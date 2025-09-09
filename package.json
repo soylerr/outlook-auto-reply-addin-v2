@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npx http-server -p 8080 -c-1",
     "build": "echo 'No build process needed for static files'",
-    "deploy": "gh-pages -d ."
+    "deploy": "gh-pages -d . -r https://$GH_PAT@github.com/ozridvan/outlook-auto-reply-addin-v2.git"
   },
   "keywords": [
     "outlook",
@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ridvan-soyler/outlook-auto-reply-addin-v2.git"
+    "url": "https://github.com/ozridvan/outlook-auto-reply-addin-v2.git"
   },
-  "homepage": "https://ridvan-soyler.github.io/outlook-auto-reply-addin-v2"
+  "homepage": "https://ozridvan.github.io/outlook-auto-reply-addin-v2"
 }
