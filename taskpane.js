@@ -1,12 +1,36 @@
 // Office.js initialization
 Office.onReady((info) => {
+    console.log('Office.onReady called', info);
     if (info.host === Office.HostType.Outlook) {
-        document.getElementById('autoReplyForm').addEventListener('submit', setAutoReply);
-        loadColleagues();
-        setupFormListeners();
-        setDefaultDates();
+        initializeApp();
     }
 });
+
+// Fallback initialization for testing in browser
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing app');
+    // Add a small delay to ensure Office.js has time to load
+    setTimeout(() => {
+        if (!window.officeInitialized) {
+            console.log('Office.js not initialized, using fallback');
+            initializeApp();
+        }
+    }, 1000);
+});
+
+function initializeApp() {
+    console.log('Initializing app');
+    window.officeInitialized = true;
+    
+    const form = document.getElementById('autoReplyForm');
+    if (form) {
+        form.addEventListener('submit', setAutoReply);
+    }
+    
+    loadColleagues();
+    setupFormListeners();
+    setDefaultDates();
+}
 
 // Global variables
 let colleagues = [];
@@ -104,10 +128,17 @@ const mockColleagues = [
 ];
 
 function loadColleagues() {
+    console.log('Loading colleagues...');
     // In production, this would be an API call to D365
     colleagues = mockColleagues;
+    console.log('Colleagues loaded:', colleagues.length);
     
     const colleagueSelect = document.getElementById('colleague');
+    if (!colleagueSelect) {
+        console.error('Colleague select element not found!');
+        return;
+    }
+    
     colleagueSelect.innerHTML = '<option value="">Seçiniz...</option>';
     
     colleagues.forEach(colleague => {
@@ -115,7 +146,10 @@ function loadColleagues() {
         option.value = colleague.id;
         option.textContent = `${colleague.name} (${colleague.department})`;
         colleagueSelect.appendChild(option);
+        console.log('Added colleague:', colleague.name);
     });
+    
+    console.log('Colleagues loaded successfully, total options:', colleagueSelect.options.length);
 }
 
 
