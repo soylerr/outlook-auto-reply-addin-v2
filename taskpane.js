@@ -229,14 +229,14 @@ function updatePreview() {
     };
     
     let messageBody = messageTemplate.body
-        .replace('{startDate}', startDateTime)
-        .replace('{endDate}', endDateTime)
-        .replace('{colleagueName}', colleague.name)
-        .replace('{email}', colleague.email)
-        .replace('{phone}', colleague.phone)
-        .replace('{userName}', currentUser.name)
-        .replace('{position}', currentUser.position)
-        .replace('{company}', currentUser.company);
+        .replaceAll('{startDate}', startDateTime)
+        .replaceAll('{endDate}', endDateTime)
+        .replaceAll('{colleagueName}', colleague.name)
+        .replaceAll('{email}', colleague.email)
+        .replaceAll('{phone}', colleague.phone)
+        .replaceAll('{userName}', currentUser.name)
+        .replaceAll('{position}', currentUser.position)
+        .replaceAll('{company}', currentUser.company);
     
     previewDiv.textContent = `Konu: ${messageTemplate.subject}\n\n${messageBody}`;
 }
@@ -280,14 +280,14 @@ function setAutoReply(event) {
     };
     
     let messageBody = messageTemplate.body
-        .replace('{startDate}', startDateTimeFormatted)
-        .replace('{endDate}', endDateTimeFormatted)
-        .replace('{colleagueName}', colleague.name)
-        .replace('{email}', colleague.email)
-        .replace('{phone}', colleague.phone)
-        .replace('{userName}', currentUser.name)
-        .replace('{position}', currentUser.position)
-        .replace('{company}', currentUser.company);
+        .replaceAll('{startDate}', startDateTimeFormatted)
+        .replaceAll('{endDate}', endDateTimeFormatted)
+        .replaceAll('{colleagueName}', colleague.name)
+        .replaceAll('{email}', colleague.email)
+        .replaceAll('{phone}', colleague.phone)
+        .replaceAll('{userName}', currentUser.name)
+        .replaceAll('{position}', currentUser.position)
+        .replaceAll('{company}', currentUser.company);
     
     // Use Office.js to set the auto-reply
     Office.context.mailbox.userProfile.getAsync((result) => {
