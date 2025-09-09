@@ -172,10 +172,6 @@
             <h1>🏢 Otomatik Yanıt Yöneticisi</h1>
         </div>
         
-        <div class="language-toggle">
-            <button id="btnTurkish" class="active" onclick="setLanguage('tr')">Türkçe</button>
-            <button id="btnEnglish" onclick="setLanguage('en')">English</button>
-        </div>
         
         <form id="autoReplyForm">
             <div class="form-group">
@@ -189,7 +185,7 @@
                 <label for="startDate">Başlangıç Tarihi ve Saati:</label>
                 <div class="date-time-group">
                     <input type="date" id="startDate" class="form-control" required>
-                    <input type="time" id="startTime" class="form-control" required>
+                    <input type="time" id="startTime" class="form-control" required value="07:30">
                 </div>
             </div>
             
@@ -197,7 +193,7 @@
                 <label for="endDate">Bitiş Tarihi ve Saati:</label>
                 <div class="date-time-group">
                     <input type="date" id="endDate" class="form-control" required>
-                    <input type="time" id="endTime" class="form-control" required>
+                    <input type="time" id="endTime" class="form-control" required value="17:30">
                 </div>
             </div>
             

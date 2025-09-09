@@ -9,14 +9,12 @@ Office.onReady((info) => {
 });
 
 // Global variables
-let currentLanguage = 'tr';
 let colleagues = [];
 
-// Message templates
-const templates = {
-    tr: {
-        subject: "Otomatik Yanıt: Yıllık İzin",
-        body: `Sayın Yetkili,
+// Message template (both Turkish and English)
+const messageTemplate = {
+    subject: "Otomatik Yanıt: Yıllık İzin / Automatic Reply: Annual Leave",
+    body: `Sayın Yetkili,
 
 E-postanız için teşekkür ederim. {startDate} – {endDate} tarihleri arasında yıllık izinde olacağım ve bu süre içinde e-postalarınıza yanıt veremeyeceğim.
 
@@ -27,11 +25,11 @@ Anlayışınız için teşekkür eder, iyi çalışmalar dilerim.
 Saygılarımla,
 {userName}
 {position}
-{company}`
-    },
-    en: {
-        subject: "Automatic Reply: Annual Leave",
-        body: `Dear Sir/Madam,
+{company}
+
+---
+
+Dear Sir/Madam,
 
 Thank you for your email. I will be out of the office on annual leave from {startDate} to {endDate}, and will not be able to respond to your message during this period.
 
@@ -43,7 +41,6 @@ Kind regards,
 {userName}
 {position}
 {company}`
-    }
 };
 
 // Mock D365 data - In production, this would come from D365 API
@@ -82,6 +79,27 @@ const mockColleagues = [
         email: "can.sahin@ozturyakiler.com.tr",
         phone: "+90 212 555 0105",
         department: "IT"
+    },
+    {
+        id: 6,
+        name: "Zeynep Arslan",
+        email: "zeynep.arslan@ozturyakiler.com.tr",
+        phone: "+90 212 555 0106",
+        department: "Hukuk"
+    },
+    {
+        id: 7,
+        name: "Murat Çelik",
+        email: "murat.celik@ozturyakiler.com.tr",
+        phone: "+90 212 555 0107",
+        department: "Finans"
+    },
+    {
+        id: 8,
+        name: "Elif Koç",
+        email: "elif.koc@ozturyakiler.com.tr",
+        phone: "+90 212 555 0108",
+        department: "Operasyon"
     }
 ];
 
@@ -100,32 +118,6 @@ function loadColleagues() {
     });
 }
 
-function setLanguage(lang) {
-    currentLanguage = lang;
-    
-    // Update button states
-    document.getElementById('btnTurkish').classList.toggle('active', lang === 'tr');
-    document.getElementById('btnEnglish').classList.toggle('active', lang === 'en');
-    
-    // Update labels based on language
-    if (lang === 'en') {
-        document.querySelector('label[for="colleague"]').textContent = 'Authorized Person:';
-        document.querySelector('label[for="startDate"]').textContent = 'Start Date and Time:';
-        document.querySelector('label[for="endDate"]').textContent = 'End Date and Time:';
-        document.getElementById('btnSetAutoReply').textContent = 'Set Auto Reply';
-        document.querySelector('.preview-section h3').textContent = '📧 Message Preview';
-        document.querySelector('option[value=""]').textContent = 'Select...';
-    } else {
-        document.querySelector('label[for="colleague"]').textContent = 'Yetkili Kişi:';
-        document.querySelector('label[for="startDate"]').textContent = 'Başlangıç Tarihi ve Saati:';
-        document.querySelector('label[for="endDate"]').textContent = 'Bitiş Tarihi ve Saati:';
-        document.getElementById('btnSetAutoReply').textContent = 'Otomatik Yanıtı Ayarla';
-        document.querySelector('.preview-section h3').textContent = '📧 Mesaj Önizleme';
-        document.querySelector('option[value=""]').textContent = 'Seçiniz...';
-    }
-    
-    updatePreview();
-}
 
 function setupFormListeners() {
     const inputs = ['colleague', 'startDate', 'startTime', 'endDate', 'endTime'];
@@ -135,39 +127,45 @@ function setupFormListeners() {
 }
 
 function setDefaultDates() {
-    const now = new Date();
-    const tomorrow = new Date(now);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    
-    const nextWeek = new Date(now);
+    const today = new Date();
+    const nextWeek = new Date(today);
     nextWeek.setDate(nextWeek.getDate() + 7);
     
-    document.getElementById('startDate').value = formatDate(tomorrow);
-    document.getElementById('endDate').value = formatDate(nextWeek);
-    document.getElementById('startTime').value = '09:00';
-    document.getElementById('endTime').value = '18:00';
+    const startDateInput = document.getElementById('startDate');
+    const endDateInput = document.getElementById('endDate');
+    
+    // Set minimum dates
+    startDateInput.min = formatDate(today);
+    endDateInput.min = formatDate(today);
+    
+    // Set default values
+    startDateInput.value = formatDate(today);
+    endDateInput.value = formatDate(nextWeek);
+    
+    // Add event listener to update end date minimum when start date changes
+    startDateInput.addEventListener('change', function() {
+        const startDate = new Date(this.value);
+        endDateInput.min = formatDate(startDate);
+        
+        // If end date is before start date, update it
+        if (endDateInput.value && new Date(endDateInput.value) < startDate) {
+            endDateInput.value = formatDate(startDate);
+        }
+    });
 }
 
 function formatDate(date) {
     return date.toISOString().split('T')[0];
 }
 
-function formatDisplayDate(dateStr, timeStr, language) {
+function formatDisplayDate(dateStr, timeStr) {
     const date = new Date(dateStr + 'T' + timeStr);
     
-    if (language === 'tr') {
-        return date.toLocaleDateString('tr-TR', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric'
-        }) + ' ' + timeStr;
-    } else {
-        return date.toLocaleDateString('en-US', {
-            month: 'long',
-            day: 'numeric',
-            year: 'numeric'
-        }) + ' ' + timeStr;
-    }
+    return date.toLocaleDateString('tr-TR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    }) + ' ' + timeStr;
 }
 
 function updatePreview() {
@@ -180,17 +178,14 @@ function updatePreview() {
     const previewDiv = document.getElementById('messagePreview');
     
     if (!colleagueId || !startDate || !startTime || !endDate || !endTime) {
-        previewDiv.textContent = currentLanguage === 'tr' ? 
-            'Lütfen tüm alanları doldurun...' : 
-            'Please fill in all fields...';
+        previewDiv.textContent = 'Lütfen tüm alanları doldurun...';
         return;
     }
     
     const colleague = colleagues.find(c => c.id == colleagueId);
-    const template = templates[currentLanguage];
     
-    const startDateTime = formatDisplayDate(startDate, startTime, currentLanguage);
-    const endDateTime = formatDisplayDate(endDate, endTime, currentLanguage);
+    const startDateTime = formatDisplayDate(startDate, startTime);
+    const endDateTime = formatDisplayDate(endDate, endTime);
     
     // Get current user info (in production, this would come from Office.js)
     const currentUser = {
@@ -199,7 +194,7 @@ function updatePreview() {
         company: "Öztüryakiler"
     };
     
-    let messageBody = template.body
+    let messageBody = messageTemplate.body
         .replace('{startDate}', startDateTime)
         .replace('{endDate}', endDateTime)
         .replace('{colleagueName}', colleague.name)
@@ -209,7 +204,7 @@ function updatePreview() {
         .replace('{position}', currentUser.position)
         .replace('{company}', currentUser.company);
     
-    previewDiv.textContent = `Konu: ${template.subject}\n\n${messageBody}`;
+    previewDiv.textContent = `Konu: ${messageTemplate.subject}\n\n${messageBody}`;
 }
 
 function setAutoReply(event) {
@@ -222,32 +217,27 @@ function setAutoReply(event) {
     const endTime = document.getElementById('endTime').value;
     
     if (!colleagueId || !startDate || !startTime || !endDate || !endTime) {
-        showStatus('error', currentLanguage === 'tr' ? 
-            'Lütfen tüm alanları doldurun!' : 
-            'Please fill in all fields!');
+        showStatus('error', 'Lütfen tüm alanları doldurun!');
         return;
     }
     
     const colleague = colleagues.find(c => c.id == colleagueId);
-    const template = templates[currentLanguage];
     
     const startDateTime = new Date(startDate + 'T' + startTime);
     const endDateTime = new Date(endDate + 'T' + endTime);
     
     if (startDateTime >= endDateTime) {
-        showStatus('error', currentLanguage === 'tr' ? 
-            'Bitiş tarihi başlangıç tarihinden sonra olmalıdır!' : 
-            'End date must be after start date!');
+        showStatus('error', 'Bitiş tarihi başlangıç tarihinden sonra olmalıdır!');
         return;
     }
     
     const button = document.getElementById('btnSetAutoReply');
     button.disabled = true;
-    button.textContent = currentLanguage === 'tr' ? 'Ayarlanıyor...' : 'Setting...';
+    button.textContent = 'Ayarlanıyor...';
     
     // Prepare the auto-reply message
-    const startDateTimeFormatted = formatDisplayDate(startDate, startTime, currentLanguage);
-    const endDateTimeFormatted = formatDisplayDate(endDate, endTime, currentLanguage);
+    const startDateTimeFormatted = formatDisplayDate(startDate, startTime);
+    const endDateTimeFormatted = formatDisplayDate(endDate, endTime);
     
     const currentUser = {
         name: "Kullanıcı Adı", // This would be retrieved from Office context
@@ -255,7 +245,7 @@ function setAutoReply(event) {
         company: "Öztüryakiler"
     };
     
-    let messageBody = template.body
+    let messageBody = messageTemplate.body
         .replace('{startDate}', startDateTimeFormatted)
         .replace('{endDate}', endDateTimeFormatted)
         .replace('{colleagueName}', colleague.name)
@@ -271,18 +261,14 @@ function setAutoReply(event) {
             // In a real implementation, we would use EWS or Graph API to set auto-reply
             // For now, we'll simulate the process
             setTimeout(() => {
-                showStatus('success', currentLanguage === 'tr' ? 
-                    'Otomatik yanıt başarıyla ayarlandı!' : 
-                    'Auto-reply has been set successfully!');
+                showStatus('success', 'Otomatik yanıt başarıyla ayarlandı!');
                 
                 button.disabled = false;
-                button.textContent = currentLanguage === 'tr' ? 
-                    'Otomatik Yanıtı Ayarla' : 
-                    'Set Auto Reply';
+                button.textContent = 'Otomatik Yanıtı Ayarla';
                 
                 // Log the auto-reply details for debugging
                 console.log('Auto-reply set:', {
-                    subject: template.subject,
+                    subject: messageTemplate.subject,
                     body: messageBody,
                     startDate: startDateTime,
                     endDate: endDateTime,
@@ -291,14 +277,10 @@ function setAutoReply(event) {
                 
             }, 2000);
         } else {
-            showStatus('error', currentLanguage === 'tr' ? 
-                'Otomatik yanıt ayarlanırken hata oluştu!' : 
-                'Error occurred while setting auto-reply!');
+            showStatus('error', 'Otomatik yanıt ayarlanırken hata oluştu!');
             
             button.disabled = false;
-            button.textContent = currentLanguage === 'tr' ? 
-                'Otomatik Yanıtı Ayarla' : 
-                'Set Auto Reply';
+            button.textContent = 'Otomatik Yanıtı Ayarla';
         }
     });
 }
