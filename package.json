@@ -14,7 +14,7 @@
     "auto-reply",
     "javascript"
   ],
-  "author": "Öztüryakiler",
+  "author": "Öztiryakiler",
   "license": "MIT",
   "devDependencies": {
     "gh-pages": "^6.0.0",

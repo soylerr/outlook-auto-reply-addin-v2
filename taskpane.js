@@ -225,7 +225,7 @@ function updatePreview() {
     const currentUser = {
         name: "Kullanıcı Adı", // This would be retrieved from Office context
         position: "Pozisyon",
-        company: "Öztüryakiler"
+        company: "Öztiryakiler"
     };
     
     let messageBody = messageTemplate.body
@@ -276,7 +276,7 @@ function setAutoReply(event) {
     const currentUser = {
         name: "Kullanıcı Adı", // This would be retrieved from Office context
         position: "Pozisyon",
-        company: "Öztüryakiler"
+        company: "Öztiryakiler"
     };
     
     let messageBody = messageTemplate.body
